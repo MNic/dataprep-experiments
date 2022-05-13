@@ -35,7 +35,7 @@ class IrisDAO(BaseDataAccess):
                                 ) 
         return record
 
-    def read_data(self, fp):
+    def read_data(self, fp: str):
         data=[]
         with open(fp) as f:
             csv_dict_reader = DictReader(f)
@@ -44,8 +44,9 @@ class IrisDAO(BaseDataAccess):
                 data.append(iris)
         return data
 
-    def sample(self):
-        return self.data[random.randint(0, self.size)]
+    def sample(self, size: int=1):
+        # Random sample without replacement
+        return random.sample(self.data, size)
 
     def asjson(self):
         return [asdict(item) for item in self.data]
